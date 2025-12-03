@@ -10,7 +10,7 @@ struct Breathing: View {
     var body: some View {
         ZStack{
             Color.burntOrange.edgesIgnoringSafeArea(.all)
-                .opacity(0.15)
+                .opacity(0.25)
             Text("Breathing")
         }
     }
