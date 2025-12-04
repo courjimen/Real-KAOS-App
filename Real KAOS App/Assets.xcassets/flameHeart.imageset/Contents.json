@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "New Cloud.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "yellFredH.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
