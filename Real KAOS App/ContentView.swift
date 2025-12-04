@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  Real KAOS App
@@ -8,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     var body: some View {
         NavigationStack {
             ZStack{
@@ -21,6 +23,7 @@ struct ContentView: View {
                     
                     Text("How are you feeling?")
                         .font(.custom("Lexend-Bold", size: 20))
+                        .dynamicTypeSize(.accessibility1)
                     
                     //BUTTON
                     NavigationLink(destination: HomePage()){
@@ -30,7 +33,7 @@ struct ContentView: View {
                     }
                     Text("Calm")
                         .font(.custom("Lexend-Regular", size: 20))
-                    //BUTTON
+                        .dynamicTypeSize(.accessibility1)                    //BUTTON
                     NavigationLink(destination: Breathing()){
                         Image(.orangeFlame)
                             .resizable()
@@ -48,7 +51,7 @@ struct ContentView: View {
                     Text("Frustrated")
                         .font(.custom("Lexend-Regular", size: 20))
                     Spacer()
-                    //BUTTON
+                        .dynamicTypeSize(.accessibility1)                    //BUTTON
                     NavigationLink(destination: Breathing()){
                         Image(.redFlame)
                             .resizable()
@@ -70,8 +73,8 @@ struct ContentView: View {
                     Text("Angry")
                         .font(.custom("Lexend-Regular", size: 20))
                         .padding(.top, -50)
-                }
-                .padding()
+                    
+                } .dynamicTypeSize(.accessibility1)                .padding()
                 
             }
         }

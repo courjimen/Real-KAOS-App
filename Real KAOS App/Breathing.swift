@@ -11,7 +11,7 @@ struct Breathing: View {
         ZStack{
             Color.burntOrange.edgesIgnoringSafeArea(.all)
                 .opacity(0.25)
-            Text("Breathing")
+            Text("Breathe with me")
         }
     }
 }
