@@ -12,7 +12,6 @@ struct ContentView: View {
         NavigationStack {
             ZStack{
                 Color.burntOrange.edgesIgnoringSafeArea(.all)
-                    .opacity(0.15)
                 
                 VStack {
                     Image(.kaosLogo)

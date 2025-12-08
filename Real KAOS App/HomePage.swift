@@ -9,48 +9,81 @@ import SwiftUI
 
 struct HomePage: View {
     @State var heartButton = false
+    @State var delayNav = false
     
     var body: some View {
         ZStack { Color.burntOrange.edgesIgnoringSafeArea(.all)
-                .opacity(0.15)
-//            Button {
-//            
-//            } label: {
-//                Image(systemName: "heart.fill")
-//                    .resizable()
-//                    .frame(width: 225, height: 175)
-//                    .padding(.top, 170)
-//                    .foregroundStyle(Color.burgundy)
-//            }
-
-//            Image(.redHeart)
-//                .resizable()
-//                .frame(width: 225, height: 175)
-//                .padding(.top, 170)
-//                .shadow(color: .black, radius: 10)
-//                .overlay(Text("Do A Kind Act"))
-               
-                
+            
             VStack (alignment: .center){
-           
+                HStack{
+                    Image(.kaosLogo)
+                        .padding(.leading, 100)
+                    NavigationLink(destination: Progress())
+                    { Image(.yellowFlame)
+                            .resizable()
+                            .frame(width: 50, height: 75)
+                            .padding(.leading, 50)
+                            .overlay(Text("5")
+                                .foregroundStyle(Color.burgundy)
+                                .font(Font.custom("Lexend-Bold", size: 18))
+                                .padding(.leading, 50)
+                                .padding(.top, 45))
+                    }
+                }
+                .padding(.bottom, 50)
                 Button {
                     heartButton.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                        delayNav = true
+                    })
+                    
                 } label: {
                     Image(.yellowFlame)
                         .resizable()
                         .frame(width: 325, height: 435)
+                        .background(
+                            NavigationLink(destination: KindActs(),isActive: $delayNav) {
+                                Image(systemName: "heart.fill")
+                                    .resizable()
+                                    .frame(width: 215, height: 165)
+                                    .padding(.top, 120)
+                                    .offset(x: 6, y: 75)
+                                    .foregroundStyle(heartButton ? Color.burgundy : Color.burntOrange)
+                            }
+                        )
+                }
+                .onAppear {
+                    delayNav = false
+                    heartButton = false
                 }
                 Text("Do A Kind Act")
                     .font(Font.custom("Lexend-Bold", size: 25))
-                    .offset(y: -100)
+                    .foregroundStyle(heartButton ? Color.white : Color.burgundy)
+                    .offset(x: 5, y: -115)
+                
                 Text("You are feeling irritated right now")
-                Text("Insert Affirmation").bold()
-            
+                Text("(Insert Affirmation)").bold()
+                
                 HStack {
-                    Image(.cloud)
-                    Image(.cloud)
+                    NavigationLink(destination: ReflectionQuiz()) {
+                        Image(.cloud)
+                            .overlay(
+                                Text("Reflection Activity")
+                                    .foregroundStyle(Color.burgundy)
+                                    .offset(y: 5)
+                            )}
+                    
+                    NavigationLink(destination: Breathing()){
+                        Image(.cloud)
+                            .overlay(
+                                Text("Stress Reduction")
+                                    .foregroundStyle(Color.burgundy)
+                                    .offset(y: 4)
+                            )}
                 }
             }
+            .padding(.bottom, 50)
         }
     }
 }
