@@ -39,36 +39,36 @@ struct Breathing: View {
                         .scaleEffect(scale)
                         .animation(.easeIn(duration: 4.0), value: scale)
                 }
-                    .overlay(Image(.redHeart)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .offset(y: 112))
-                    
-                
-                VStack {
-                    Button("Hold") {
-                        timerRunning = true
-                    }.foregroundColor(.white)
-                    
-                    Text("\(countdownTimer)")
-                    
-                        .foregroundStyle(Color.white)
-                        .onReceive(timer) { _ in
-                            if countdownTimer > 0 && timerRunning {
-                                countdownTimer -= 1
-                            } else {
-                                timerRunning = false
-                            }
-                            
-                        }
-                        .font(.system(size: 40, weight: .bold))
-                    
-                    Button("Exhale") {
-                        exhaleButton = true
-                    }.foregroundColor(.yellow)
-                }
-                .offset(y: -50)
+//                                    .overlay(Image(.redHeart)
+//                                        .resizable()
+//                                        .scaledToFit()
+//                                        .frame(width: 200, height: 200)
+//                                        .offset(y: 112))
+//                
+//                
+//                                VStack {
+//                                    Button("Hold") {
+//                                        timerRunning = true
+//                                    }.foregroundColor(.white)
+//                
+//                                    Text("\(countdownTimer)")
+//                
+//                                        .foregroundStyle(Color.white)
+//                                        .onReceive(timer) { _ in
+//                                            if countdownTimer > 0 && timerRunning {
+//                                                countdownTimer -= 1
+//                                            } else {
+//                                                timerRunning = false
+//                                            }
+//                
+//                                        }
+//                                        .font(.system(size: 40, weight: .bold))
+//                
+//                                    Button("Exhale") {
+//                                        exhaleButton = true
+//                                    }.foregroundColor(.yellow)
+//                                }
+//                                .offset(y: -50)
             }
         }
     }

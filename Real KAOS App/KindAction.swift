@@ -5,9 +5,10 @@
 //  Created by Courey Jimenez on 12/5/25.
 //
 //
-//import Foundation
-//
-//struct KindData: Hashable {
-//    let prompt: String
-//    let image: String
-//}
+import SwiftUI
+
+struct KindAction: View {
+    var body: some View {
+      //  let simpleAct = [ ]
+    }
+}
