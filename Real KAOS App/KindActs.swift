@@ -6,9 +6,24 @@
 //
 
 import SwiftUI
-
+//, Color(red: 1.0, green: 0.73, blue: 0.03)
 struct KindActs: View {
-    @GestureState var offset = CGSize.zero
+   // @GestureState var offset = CGSize.zero
+    let simpleGradient = LinearGradient(
+          colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 1.0, green: 0.73, blue: 0.03)],
+          startPoint: .leading,
+          endPoint: .trailing
+      )
+    let affordableGradient = LinearGradient(
+        colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 0.89, green: 0.39, blue: 0.08)],
+          startPoint: .leading,
+          endPoint: .trailing
+      )
+    let impactfulGradient = LinearGradient(
+        colors: [Color(.orange), Color(.red)],
+          startPoint: .leading,
+          endPoint: .trailing
+      )
     @State var simpleActs: [Kindness] = [
         Kindness(category: "Simple", image: "yellowFlame", task: "Give a genuine, specific compliment to a stranger or an acquanintance. Focus on something they chose (e.g., a project they worked on) not just an inherent trait." ),
         Kindness(category: "Simple", image: "yellowFlame", task: "Let a merging car into your lane with a wave or smile."),
@@ -38,15 +53,15 @@ struct KindActs: View {
         Kindness(category: "Impactful", image: "redFlame", task: "G" ),
     ]
     var body: some View {
-    
+  
         VStack(alignment: .center){
             ZStack{
                 Color.burntOrange.edgesIgnoringSafeArea(.all)
-                    .gesture(
-                        DragGesture()
-                            .updating($offset) {
-                                value, state, _ in state = value.translation
-                            })
+//                    .gesture(
+//                        DragGesture()
+//                            .updating($offset) {
+//                                value, state, _ in state = value.translation
+//                            })
                 
                 VStack{
                     HStack{
@@ -69,32 +84,32 @@ struct KindActs: View {
                         .font(.custom("Lexend-Bold", size: 20))
                         .padding(10)
                     
-                    NavigationLink {
-                        KindCard(kindnessCard: simpleActs.randomElement()!)
-                    } label: {
-                        RoundedRectangle(cornerRadius: 25)
-                            .frame(width: 350, height: 100)
-                            //.gradient(Colors: [.yellow, .orange])
-                            .foregroundColor(Color.orange)
-                            .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.burgundy, lineWidth: 2))
-                            .overlay(Text("Simple Acts")
-                                .font(.custom("Lexend-Bold", size: 18))
-                                .foregroundStyle(.black)
-                                .padding(.trailing, 190)
-                                .padding(.top, -30))
-                        
-                            .overlay(Text("These are quick, low-effort acts that can be done daily to build a habit of kindness.")
-                                .multilineTextAlignment(.leading)
-                                .font(.custom("Lexend-Medium", size: 14))
-                                .foregroundStyle(Color.white)
-                                .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 30)))
-                    }
-                    
+                        NavigationLink {
+                            KindCard(kindnessCard: simpleActs.randomElement()!)
+                        } label: {
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(simpleGradient)
+                                .frame(width: 350, height: 100)
+                                .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.burgundy, lineWidth: 2))
+                                .overlay(Text("Simple Acts")
+                                    .font(.custom("Lexend-Bold", size: 18))
+                                    .foregroundStyle(.black)
+                                    .padding(.trailing, 190)
+                                    .padding(.top, -30))
+                            
+                                .overlay(Text("These are quick, low-effort acts that can be done daily to build a habit of kindness.")
+                                    .multilineTextAlignment(.leading)
+                                    .font(.custom("Lexend-Medium", size: 14))
+                                    .foregroundStyle(Color.white)
+                                    .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 30)))
+                        }
+                
                     NavigationLink {
                         KindCard(kindnessCard: affordableActs.randomElement()!)
                            
                     } label: {
                         RoundedRectangle(cornerRadius: 25)
+                            .fill(affordableGradient)
                             .frame(width: 350, height: 100)
                             .foregroundColor(Color.orange)
                             .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.burgundy, lineWidth: 2))
@@ -115,8 +130,8 @@ struct KindActs: View {
                         KindCard(kindnessCard: impactfulActs.randomElement()!)
                     } label: {
                         RoundedRectangle(cornerRadius: 25)
+                            .fill(impactfulGradient)
                             .frame(width: 350, height: 100)
-                            .foregroundColor(Color.orange)
                             .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.burgundy, lineWidth: 2))
                             .overlay(Text("Impactful Acts")
                                 .font(.custom("Lexend-Bold", size: 18))

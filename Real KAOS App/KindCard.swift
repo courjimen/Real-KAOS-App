@@ -32,15 +32,15 @@ struct KindCard : View {
         ZStack {
             Color.burntOrange.edgesIgnoringSafeArea(.all)
             
-            ForEach(1...3, id: \.self) { index in
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color(red: 0.95, green: 0.70, blue: 0.45))
-                    .frame(width: 325, height: 450)
-                    .rotationEffect(.degrees(Double(index * 2)))
-                    .offset(x: CGFloat(index * 5), y: CGFloat(index * 5))
-                    .shadow(radius: 5)
-            }
-            
+//            ForEach(1...3, id: \.self) { index in
+//                RoundedRectangle(cornerRadius: 15)
+//                    .fill(Color(red: 0.95, green: 0.70, blue: 0.45))
+//                    .frame(width: 325, height: 450)
+//                    .rotationEffect(.degrees(Double(index * 2)))
+//                    .offset(x: CGFloat(index * 5), y: CGFloat(index * 5))
+//                    .shadow(radius: 5)
+//            }
+//            
             VStack(spacing: 50) {
 //CATEGORY
                 ZStack {
