@@ -31,8 +31,8 @@ struct Breathing: View {
           
             VStack(spacing: 16) {
                 Text("Breathe with me...")
-                    .font(.custom("Lexend-Bold", size: 20))
-                    .padding(.top, 50)
+                    .font(.custom("Lexend-Bold", size: 30))
+                    .padding(.top, 40)
                 
                 LinearGradient(colors: flameGradient, startPoint: .top, endPoint: .bottom)
                     .mask(
@@ -54,7 +54,7 @@ struct Breathing: View {
                     Text("\(countdownTimer)")
                         .font(.system(size: 45, weight: .bold))
                         .foregroundColor(.black)
-                        .padding(.top, -125)
+                        .padding(.top, -100)
                         .onReceive(timer) { _ in
                             
                     guard timerRunning else { return }
