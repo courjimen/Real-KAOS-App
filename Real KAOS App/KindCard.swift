@@ -30,7 +30,7 @@ struct KindCard : View {
     var body: some View {
         
         ZStack {
-            cardBackgroundColor.edgesIgnoringSafeArea(.all)
+            Color.burntOrange.edgesIgnoringSafeArea(.all)
             
             ForEach(1...3, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 15)
