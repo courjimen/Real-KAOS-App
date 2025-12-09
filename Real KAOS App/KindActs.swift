@@ -74,6 +74,7 @@ struct KindActs: View {
                     } label: {
                         RoundedRectangle(cornerRadius: 25)
                             .frame(width: 350, height: 100)
+                            //.gradient(Colors: [.yellow, .orange])
                             .foregroundColor(Color.orange)
                             .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.burgundy, lineWidth: 2))
                             .overlay(Text("Simple Acts")

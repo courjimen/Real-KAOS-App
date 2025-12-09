@@ -6,8 +6,9 @@
 //
 import Foundation
 
-struct Kindness {
-    var category: String
-    var image: String
-    var task: String
+struct Kindness: Identifiable {
+    let id = UUID()
+    let category: String
+    let image: String
+    let task: String
 }

@@ -1,80 +1,189 @@
-//
-//  Breathing.swift
-//  Real KAOS App
-//
-//  Created by Courey Jimenez on 12/1/25.
-
 import SwiftUI
-//Inhale 4 seconds Hold for 7 Exhale for 8
+
+// Inhale 4 seconds • Hold 7 seconds • Exhale 8 seconds
 
 struct Breathing: View {
-    
-    @State var scale = 1.0
-    @State var animationAmount = 0.5
-    @State var inhaleButton = false
-    @State var holdBreath = false
-    @State var exhaleButton = false
-    @State var countdownTimer = 7
-    @State var timerRunning = false
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+
+    @State private var scale: CGFloat = 1.0
+    @State private var phase: BreathPhase = .idle
+    @State private var flameGradient: [Color] = [
+        Color.yellow, Color.orange.opacity(0.4)
+    ]
+    @State private var countdownTimer: Int = 7
+    @State private var timerRunning = false
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        
-        ZStack{
+        ZStack {
+            
             Color.burntOrange.edgesIgnoringSafeArea(.all)
-            VStack {
+            
+            Text(phaseText)
+                .font(.custom("Lexend-Bold", size: 20))
+                .minimumScaleFactor(0.5)
+                .foregroundColor(phase == .hold ? .black : .burgundy)
+                .shadow(color: (phase == .hold ? Color.black.opacity(0.25) : Color.white.opacity(0.8)),
+                        radius: 0, x: 0, y: 0)
+                .frame(width: 150, height: 150)
+                .padding(.top, 100)
+                .scaleEffect(scale)
+                .animation(animationForPhase, value: scale)
+          
+            VStack(spacing: 16) {
                 Text("Breathe with me...")
                     .font(.custom("Lexend-Bold", size: 20))
-                    .padding()
-                Button {
-                    inhaleButton = true
-                    self.scale = 2.0
+                    .padding(.top, 50)
+                
+                LinearGradient(colors: flameGradient, startPoint: .top, endPoint: .bottom)
+                    .mask(
+                        Image(.yellowFlame)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 250, height: 250)
+                    )
+                    .scaleEffect(scale)
+                    .animation(animationForPhase, value: scale)
+                    .animation(.easeInOut(duration: 1.0), value: flameGradient)
+                
+                Text(phaseLabel)
+                    .font(.custom("Lexend-Medium", size: 20))
+                    .foregroundColor(.black.opacity(0.9))
+                
+                if phase == .hold {
+                    
+                    Text("\(countdownTimer)")
+                        .font(.system(size: 45, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.top, -125)
+                        .onReceive(timer) { _ in
+                            
+                    guard timerRunning else { return }
+                            
+                            if countdownTimer > 0 {
+                                
+                                countdownTimer -= 1
+                                
+                            } else {
+                                timerRunning = false
+                                startExhale()
+                            }
+                        }
                 }
-                label: {
-                    Image(.inhale)
-                        .scaledToFit()
-                        .frame(width: 250, height: 250)
-                        .scaleEffect(scale)
-                        .animation(.easeIn(duration: 4.0), value: scale)
+                
+                Button(action: startSequence) {
+                    
+                    Text(phase == .idle ? "Start" : "Restart")
+                        .font(.custom("Lexend-Bold", size: 18))
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                        .background(Color.burgundy.opacity(0.15))
+                        .foregroundColor(.black)
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule().stroke(Color.burgundy.opacity(0.35), lineWidth: 1)
+                        )
                 }
-//                                    .overlay(Image(.redHeart)
-//                                        .resizable()
-//                                        .scaledToFit()
-//                                        .frame(width: 200, height: 200)
-//                                        .offset(y: 112))
-//                
-//                
-//                                VStack {
-//                                    Button("Hold") {
-//                                        timerRunning = true
-//                                    }.foregroundColor(.white)
-//                
-//                                    Text("\(countdownTimer)")
-//                
-//                                        .foregroundStyle(Color.white)
-//                                        .onReceive(timer) { _ in
-//                                            if countdownTimer > 0 && timerRunning {
-//                                                countdownTimer -= 1
-//                                            } else {
-//                                                timerRunning = false
-//                                            }
-//                
-//                                        }
-//                                        .font(.system(size: 40, weight: .bold))
-//                
-//                                    Button("Exhale") {
-//                                        exhaleButton = true
-//                                    }.foregroundColor(.yellow)
-//                                }
-//                                .offset(y: -50)
+                .padding()
+                
+                Spacer()
             }
+            .padding(.horizontal, 24)
         }
     }
-    //ease in first
-    //dispatch
-    //ease out
+    
+    private func startSequence() {
+        
+        phase = .idle
+        withAnimation(.easeInOut(duration: 0.3)){
+            scale = 1.0}
+        
+        flameGradient = [Color.yellow, Color.orange.opacity(0.4)]
+        countdownTimer = 7
+        timerRunning = false
+        
+        phase = .inhale
+        
+        withAnimation(.easeIn(duration: 4.0)) {
+            
+            scale = 2.0
+            
+        }
+        
+        withAnimation(.linear(duration: 4.0)) {
+            flameGradient = [Color.orange.opacity(0.85), Color.orange]
+        }
+        
+        Task {
+            
+            try? await Task.sleep(nanoseconds: 4_000_000_000)
+            phase = .hold
+            withAnimation(.easeInOut(duration: 1.0)) {
+                flameGradient = [Color.red.opacity(0.4),Color.red.opacity(0.9), Color.red]
+                
+            }
+            
+            countdownTimer = 7
+            timerRunning = true
+        }
+    }
+    
+    private func startExhale() {
+        phase = .exhale
+        
+        withAnimation(.easeOut(duration: 8.0)) {
+            scale = 1.0
+        }
+        
+        withAnimation(.linear(duration: 8.0)) {
+            flameGradient = [Color.yellow, Color.orange.opacity(0.35)]
+        }
+        
+        Task {
+            try? await Task.sleep(nanoseconds: 8_000_000_000)
+            phase = .idle
+        }
+    }
+    
+    private var animationForPhase: Animation {
+        
+        switch phase {
+        case .inhale:
+            return .easeIn(duration: 4.0)
+        case .exhale:
+            return .easeOut(duration: 8.0)
+            
+        default:
+            return .default
+        }
+    }
+    
+    private var phaseLabel: String {
+        
+        switch phase {
+        case .idle:   return "Ready"
+        case .inhale: return ""
+        case .hold:   return ""
+        case .exhale: return ""
+        }
+    }
+    
+    private var phaseText: String {
+        
+        switch phase {
+        case .inhale: return "Inhale…"
+        case .hold:   return "Hold…"
+        case .exhale: return "Exhale…"
+        default: return ""
+            
+        }
+    }
+}
+
+
+private enum BreathPhase {
+    
+    case idle, inhale, hold, exhale
+    
 }
 
 #Preview {
