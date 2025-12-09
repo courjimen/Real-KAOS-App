@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct KindActs: View {
+    @GestureState var offset = CGSize.zero
     @State var simpleActs: [Kindness] = [
         Kindness(category: "Simple", image: "yellowFlame", task: "Give a genuine, specific compliment to a stranger or an acquanintance. Focus on something they chose (e.g., a project they worked on) not just an inherent trait." ),
         Kindness(category: "Simple", image: "yellowFlame", task: "Let a merging car into your lane with a wave or smile."),
@@ -17,7 +18,7 @@ struct KindActs: View {
         Kindness(category: "Simple", image: "yellowFlame", task: "Leave a positive note on a stranger's car."),
         Kindness(category: "Simple", image: "yellowFlame", task: "Hold the door or the elevator for others, especially if they have their hands full." )
     ]
-    
+     
     @State var affordableActs: [Kindness] = [
         Kindness(category: "Affordable", image: "orangeFlame", task: "Pay for someone else's order in a drive-thru or their coffee in line and drive away."),
         Kindness(category: "Affordable", image: "orangeFlame", task: "Give an extra-large tip to a server or barista who provides great service."),
@@ -37,9 +38,15 @@ struct KindActs: View {
         Kindness(category: "Impactful", image: "redFlame", task: "G" ),
     ]
     var body: some View {
+    
         VStack(alignment: .center){
             ZStack{
                 Color.burntOrange.edgesIgnoringSafeArea(.all)
+                    .gesture(
+                        DragGesture()
+                            .updating($offset) {
+                                value, state, _ in state = value.translation
+                            })
                 
                 VStack{
                     HStack{
@@ -84,6 +91,7 @@ struct KindActs: View {
                     
                     NavigationLink {
                         KindCard(kindnessCard: affordableActs.randomElement()!)
+                           
                     } label: {
                         RoundedRectangle(cornerRadius: 25)
                             .frame(width: 350, height: 100)

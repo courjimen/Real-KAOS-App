@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct KindCard : View {
+
     var kindnessCard : Kindness
     var body: some View {
         ZStack{
