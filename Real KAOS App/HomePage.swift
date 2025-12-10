@@ -7,26 +7,32 @@ struct HomePage: View {
     @State var heartButton = false
     @State var delayNav = false
     
+    var streakCount: Int {
+        sharedData.calculateCurrentStreak()
+    }
+    
     var body: some View {
         ZStack { Color.burntOrange.edgesIgnoringSafeArea(.all)
             
             VStack (alignment: .center){
-                HStack{
-                    Image(.kaosLogo)
-                        .padding(.leading, 100)
-                    NavigationLink(destination: Streak())
-                    { Image(.yellowFlame)
-                            .resizable()
-                            .frame(width: 50, height: 75)
-                            .padding(.leading, 50)
-                            .overlay(Text("5")
-                                .foregroundStyle(Color.burgundy)
-                                .font(Font.custom("Lexend-Bold", size: 18))
-                                .padding(.leading, 50)
-                                .padding(.top, 45))
-                    }
-                }
-                .padding(.bottom, 50)
+                            HStack{
+                                Image(.kaosLogo)
+                                    .padding(.leading, 100)
+                                NavigationLink(destination: Streak())
+                                { Image(.yellowFlame)
+                                    .resizable()
+                                    .frame(width: 50, height: 75)
+                                    .padding(.leading, 50)
+                                    
+                                    // ⭐️ MODIFIED CODE HERE: Use the streakCount variable
+                                    .overlay(Text("\(streakCount)")
+                                        .foregroundStyle(Color.burgundy)
+                                        .font(Font.custom("Lexend-Bold", size: 18))
+                                        .padding(.leading, 50)
+                                        .padding(.top, 45))
+                                }
+                            }
+                            .padding(.bottom, 50)
                 Button {
                     heartButton.toggle()
                     

@@ -3,14 +3,6 @@ import SwiftUI
 struct Streak : View {
     @EnvironmentObject var sharedData: SharedData
     
-    func flameColor(for category: String) -> Color {
-        switch category.lowercased(){
-        case "simple" : return .yellow
-        case "affordable" : return .orange
-        case "impactful" : return .red
-        default : return .clear
-        }
-    }
     var body: some View {
         NavigationView {
                     VStack {
@@ -25,9 +17,9 @@ struct Streak : View {
                             .foregroundColor(.burgundy)
                             .padding(.bottom, 20)
 
-                        // Calendar
+                        // MARK: Calendar
                         ScrollView {
-                            MonthView(sharedData: sharedData, flameColor: flameColor)
+                            MonthView(sharedData: sharedData)
                         }
                     }
                     .background(Color.burntOrange.edgesIgnoringSafeArea(.all))
@@ -76,7 +68,6 @@ struct Streak : View {
 
         struct MonthView: View {
             @ObservedObject var sharedData: SharedData
-            let flameColor: (String) -> Color
             
             @State private var currentDate = Date()
             private let calendar = Calendar.current
@@ -105,7 +96,7 @@ struct Streak : View {
                     
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 10) {
                         ForEach(daysInMonth(for: currentDate), id: \.self) { day in
-                            DayCell(date: day, streakLog: sharedData.streakLog, flameColor: flameColor)
+                            DayCell(date: day, streakLog: sharedData.streakLog)
                         }
                     }
                     .padding(.horizontal)
@@ -154,8 +145,7 @@ struct Streak : View {
         struct DayCell: View {
             let date: Date?
             let streakLog: [StreakItem]
-            let flameColor: (String) -> Color
-            
+        
             private var isToday: Bool {
                 guard let date = date else { return false }
                 return Calendar.current.isDateInToday(date)
@@ -172,16 +162,14 @@ struct Streak : View {
                         
                         Circle()
                             .stroke(isToday ? Color.burgundy : Color.clear, lineWidth: 2)
-                            .frame(width: 35, height: 35)
+                            .frame(width: 50, height: 55)
                         
-                        // Flame/Kindness Marker
+// MARK: Flame/Kindness Marker
                         if let item = streakItem {
-                            Image(systemName: "flame.fill")
+                            Image(.redFlame)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 25)
-                                .foregroundColor(flameColor(item.category))
-                                .offset(y: -10)
+                                .frame(width: 45, height: 50)
                         }
                    
                         Text("\(Calendar.current.component(.day, from: date))")
@@ -196,6 +184,28 @@ struct Streak : View {
             }
         }
 
+// MARK: - Preview Mock Data
+
 #Preview {
-    Streak()
+    let mockData = SharedData()
+    let calendar = Calendar.current
+    
+    let today = calendar.startOfDay(for: Date())
+    guard let yesterday = calendar.date(byAdding: .day, value: -1, to: today),
+          let dayBeforeYesterday = calendar.date(byAdding: .day, value: -2, to: today),
+          let threeDaysAgo = calendar.date(byAdding: .day, value: -3, to: today),
+          let fiveDaysAgo = calendar.date(byAdding: .day, value: -5, to: today) else {
+        fatalError("Could not generate mock dates.")
+    }
+    
+    mockData.streakLog = [
+        
+        StreakItem(date: fiveDaysAgo, category: "Simple"),
+        StreakItem(date: threeDaysAgo, category: "Affordable"),
+        StreakItem(date: dayBeforeYesterday, category: "Simple"),
+        StreakItem(date: yesterday, category: "Impactful"),
+        StreakItem(date: today, category: "Simple")
+    ]
+    return Streak()
+        .environmentObject(mockData)
 }
