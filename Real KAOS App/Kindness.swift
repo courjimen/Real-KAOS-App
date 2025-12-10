@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Kindness: Identifiable {
+struct Kindness: Identifiable, Equatable {
     let id = UUID()
     let category: String
     let image: String
