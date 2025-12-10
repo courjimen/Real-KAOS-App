@@ -14,7 +14,7 @@ struct HomePage: View {
                 HStack{
                     Image(.kaosLogo)
                         .padding(.leading, 100)
-                    NavigationLink(destination: EmptyView())
+                    NavigationLink(destination: Streak())
                     { Image(.yellowFlame)
                             .resizable()
                             .frame(width: 50, height: 75)

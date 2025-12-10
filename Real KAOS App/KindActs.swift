@@ -56,7 +56,7 @@ struct KindActs: View {
         Kindness(category: "Impactful", image: "redFlame", task: "Bring a box of donuts or other treats to the office to share and tell them you appreciate them." ),
         Kindness(category: "Impactful", image: "redFlame", task: "Offer to help a neighbor with their grocery shopping and walk their dog." ),
         Kindness(category: "Impactful", image: "redFlame", task: "Hide a small amount of money (like a few dollars or coins) on a store shelf or at a vending machine for the next person to find." ),
-        Kindness(category: "Impactful", image: "redFlame", task: "G" ),
+        Kindness(category: "Impactful", image: "redFlame", task: "Give your time or donate to a local charity." ),
     ]
     
     private var currentDeck: [Kindness] {
