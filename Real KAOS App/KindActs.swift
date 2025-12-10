@@ -1,20 +1,24 @@
 import SwiftUI
 
 struct KindActs: View {
-    
+    @EnvironmentObject var sharedData: SharedData
     enum ViewState: String {
         case none, simple, affordable, impactful
     }
-
+    
     @State private var selectedCategory: ViewState = .none
     @State private var dragOffset: CGSize = .zero
     @State private var rotationAngle: Double = 0.0
-   
+    @State private var savedChallenge: Kindness? = nil
+    @State private var showAlert = false
+    @State private var showSuccessSheet = false
+    @State private var savedActDescription: String? = nil
+    
     let simpleGradient = LinearGradient(
-         colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 1.0, green: 0.73, blue: 0.03)],
-         startPoint: .leading,
-         endPoint: .trailing
-     )
+        colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 1.0, green: 0.73, blue: 0.03)],
+        startPoint: .leading,
+        endPoint: .trailing
+    )
     let affordableGradient = LinearGradient(
         colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 0.89, green: 0.39, blue: 0.08)],
         startPoint: .leading,
@@ -54,7 +58,7 @@ struct KindActs: View {
         Kindness(category: "Impactful", image: "redFlame", task: "Hide a small amount of money (like a few dollars or coins) on a store shelf or at a vending machine for the next person to find." ),
         Kindness(category: "Impactful", image: "redFlame", task: "G" ),
     ]
-
+    
     private var currentDeck: [Kindness] {
         switch selectedCategory {
         case .simple: return simpleActs.shuffled()
@@ -63,29 +67,24 @@ struct KindActs: View {
         case .none: return []
         }
     }
-
+    
     private func handleCardSwipe() {
         dragOffset = .zero
         rotationAngle = 0.0
     }
-
+    
     var body: some View {
         ZStack {
             Color.burntOrange.edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 16) {
+                NavigationLink(destination: (HomePage(selectedMood: .calm))){Image(.kaosLogo)}
                 
-                HStack{
-                    Image(.yellowFlame).resizable().scaledToFit().frame(height: 50)
-                    Image(.orangeFlame).resizable().scaledToFit().frame(height: 50)
-                    Image(.redFlame).resizable().scaledToFit().frame(height: 50)
-                }
-                .padding()
-                
-                Text(selectedCategory == .none ? "Pick an act of kindness you'd like to pay forward!" : "Swipe through the **\(selectedCategory.rawValue.capitalized)** acts!")
+                Text(selectedCategory == .none ? "Pick a Kind Act Of Service you'd like to pay forward!" : "Swipe for your challenge!")
                     .multilineTextAlignment(.center)
-                    .font(.custom("Lexend-Bold", size: 20))
-                    .padding(10)
+                    .font(.custom("Lexend-Bold", size: 18))
+                    .padding()
+                
                 
                 
                 if selectedCategory == .none {
@@ -101,24 +100,26 @@ struct KindActs: View {
                             selectedCategory = .impactful
                         }
                     }
-                    .padding(.top, 40)
+                    .padding()
                     
                 } else {
-                    // Swiping Card Stack
                     CardStackView(
                         deck: currentDeck,
                         dragOffset: $dragOffset,
                         rotationAngle: $rotationAngle,
-                        onSwipe: handleCardSwipe
+                        onSwipe: handleCardSwipe,
+                        topCard: $savedChallenge
                     )
                     
-                    // Back Button
+                    // Save Challenge Button
                     Button {
-                        selectedCategory = .none
-                        dragOffset = .zero
-                        rotationAngle = 0.0
+                        if savedChallenge != nil {
+                            showAlert = true
+                        } else {
+                            selectedCategory = .none
+                        }
                     } label: {
-                        Text("Go Back to Categories")
+                        Text("Save Challenge")
                             .font(.custom("Lexend-Bold", size: 18))
                             .padding(.horizontal, 24)
                             .padding(.vertical, 12)
@@ -134,6 +135,66 @@ struct KindActs: View {
                 Spacer()
             }
         }
+        
+        .alert("Save Challenge?", isPresented: $showAlert) {
+            Button("Save and Continue") {
+                if let cardToSave = savedChallenge {
+                    sharedData.addChallenge(cardToSave)
+                    savedActDescription = cardToSave.task
+                    savedChallenge = nil
+                    showSuccessSheet = true
+                }
+                
+                selectedCategory = .none
+                dragOffset = .zero
+                rotationAngle = 0.0
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            if let challenge = savedChallenge {
+                Text("Do you want to save this challenge to your Kindness Tracker?")
+            } else {
+                Text("No challenge selected.")
+            }
+        }
+        .sheet(isPresented: $showSuccessSheet) {
+            if let description = savedActDescription {
+                NavigationStack{
+                    VStack(spacing: 25) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.green)
+                        
+                        Text("Challenge Saved!")
+                            .font(.custom("Lexend-Bold", size: 28))
+                        
+                        Text(description)
+                            .multilineTextAlignment(.center)
+                            .font(.custom("Lexend-Medium", size: 16))
+                            .padding(.horizontal, 30)
+                        
+                        NavigationLink(destination: ProgressView()) {
+                            Text("View in Kindness Tracker")
+                                .font(.custom("Lexend-Bold", size: 18))
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 12)
+                                .background(Color.burgundy)
+                                .foregroundColor(.white)
+                                .clipShape(Capsule())
+                        }
+                        .padding(.top, 10)
+                        
+                        Button("Keep Browsing") {
+                            showSuccessSheet = false
+                        }
+                        .font(.custom("Lexend-Medium", size: 16))
+                        .foregroundColor(.gray)
+                    }
+                    .padding(.top, 40)
+                }
+            }
+        }
     }
 }
 
@@ -142,7 +203,7 @@ struct CategoryButton: View {
     let gradient: LinearGradient
     let description: String
     let action: () -> Void
-
+    
     var body: some View {
         Button(action: action) {
             RoundedRectangle(cornerRadius: 25)
@@ -154,15 +215,15 @@ struct CategoryButton: View {
                         Text(title)
                             .font(.custom("Lexend-Bold", size: 18))
                             .foregroundColor(.black)
-                            
+                        
                         Text(description)
                             .multilineTextAlignment(.leading)
                             .font(.custom("Lexend-Medium", size: 14))
                             .foregroundColor(.white)
                             .padding(.top, 5)
                     }
-                .padding(.horizontal, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 )
         }
     }
@@ -171,48 +232,48 @@ struct CategoryButton: View {
 import SwiftUI
 
 struct CardStackView: View {
-
+    
     @State var deck: [Kindness]
     
     @Binding var dragOffset: CGSize
     @Binding var rotationAngle: Double
     let onSwipe: () -> Void
     
-   
+    @Binding var topCard: Kindness?
+    
     private let swipeThreshold: CGFloat = 100
     private let cardWidth: CGFloat = 325
     private let cardAnimationDuration: Double = 0.4
-    
-    
     private let headerHeight: CGFloat = 60
     private let cardHeight: CGFloat = 450
-    
-   
     private let categoryGradient = LinearGradient(
         colors: [Color(red: 0.97, green: 0.77, blue: 0.38), Color(red: 0.89, green: 0.39, blue: 0.08)],
         startPoint: .leading,
         endPoint: .trailing
     )
-
-    init(deck: [Kindness], dragOffset: Binding<CGSize>, rotationAngle: Binding<Double>, onSwipe: @escaping () -> Void) {
+    
+    init(deck: [Kindness], dragOffset: Binding<CGSize>, rotationAngle: Binding<Double>, onSwipe: @escaping () -> Void, topCard: Binding<Kindness?>) {
+        
         _deck = State(initialValue: deck)
+        
         _dragOffset = dragOffset
         _rotationAngle = rotationAngle
         self.onSwipe = onSwipe
+        _topCard = topCard
     }
-
+    
     
     private var topCardCategory: String? {
         deck.last?.category.uppercased()
     }
     
     var body: some View {
-        VStack(spacing: 50) { 
+        VStack(spacing: 50) {
             if let category = topCardCategory {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)
                         .fill(categoryGradient)
-                        .frame(width: cardWidth - 5, height: headerHeight) // Slightly narrower than the card
+                        .frame(width: cardWidth - 5, height: headerHeight)
                         .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
                         .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 3))
                     
@@ -225,13 +286,13 @@ struct CardStackView: View {
                 .zIndex(1)
             }
             
-    
+            
             ZStack {
                 if deck.isEmpty {
                     Text("You've swiped all the acts in this category!")
                         .font(.title3)
                 } else {
-              
+                    
                     ForEach(deck.indices.reversed(), id: \.self) { index in
                         
                         let card = deck[index]
@@ -241,13 +302,13 @@ struct CardStackView: View {
                         KindCard(kindnessCard: card)
                             .zIndex(Double(index))
                             .scaleEffect(isTopCard ? 1.0 : 0.95)
-                            
-                          
+                        
+                        
                             .offset(isTopCard ? dragOffset : .zero)
                             .rotationEffect(.degrees(isTopCard ? rotationAngle : 0.0))
-                            
+                        
                             .animation(.easeInOut(duration: 0.2), value: deck)
-                            
+                        
                             .gesture(isTopCard ? dragGesture() : nil)
                     }
                 }
@@ -255,9 +316,17 @@ struct CardStackView: View {
             
             .frame(height: cardHeight)
         }
+        .onAppear {
+            self.topCard = deck.last
+        }
+        .onChange(of: deck) {
+            self.topCard = deck.last
+        }
+        .onDisappear {
+            self.topCard = deck.last
+        }
     }
     
- 
     private func dragGesture() -> some Gesture {
         DragGesture()
             .onChanged { value in

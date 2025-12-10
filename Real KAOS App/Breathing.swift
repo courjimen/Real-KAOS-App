@@ -3,7 +3,7 @@ import SwiftUI
 // Inhale 4 seconds • Hold 7 seconds • Exhale 8 seconds
 
 struct Breathing: View {
-
+    let selectedMood: Mood
     @State private var scale: CGFloat = 1.0
     @State private var phase: BreathPhase = .idle
     @State private var flameGradient: [Color] = [
@@ -30,9 +30,10 @@ struct Breathing: View {
                 .animation(animationForPhase, value: scale)
           
             VStack(spacing: 16) {
-                Text("Breathe with me...")
+                Spacer()
+                Text("Let's Breathe...")
                     .font(.custom("Lexend-Bold", size: 30))
-                    .padding(.top, 40)
+                    .padding(.top, 20)
                 
                 LinearGradient(colors: flameGradient, startPoint: .top, endPoint: .bottom)
                     .mask(
@@ -171,7 +172,7 @@ struct Breathing: View {
         
         switch phase {
         case .inhale: return "Inhale…"
-        case .hold:   return "Hold…"
+        case .hold:   return "Hold"
         case .exhale: return "Exhale…"
         default: return ""
             
@@ -187,5 +188,5 @@ private enum BreathPhase {
 }
 
 #Preview {
-    Breathing()
+    Breathing(selectedMood: .angry)
 }

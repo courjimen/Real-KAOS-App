@@ -10,7 +10,7 @@ struct KindCard : View {
     var kindnessCard : Kindness
     
     var body: some View {
-        VStack(spacing: 0) { 
+        VStack(spacing: 0) {
             VStack(alignment: .center) {
                 //TOP FLAME
                 Image(kindnessCard.image)

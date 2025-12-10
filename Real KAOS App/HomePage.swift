@@ -1,13 +1,9 @@
-//
-//  HomePage.swift
-//  Real KAOS App
-//
-//  Created by Courey Jimenez on 12/1/25.
-//
-
 import SwiftUI
 
 struct HomePage: View {
+    let selectedMood: Mood
+    @EnvironmentObject var sharedData: SharedData
+    
     @State var heartButton = false
     @State var delayNav = false
     
@@ -18,7 +14,7 @@ struct HomePage: View {
                 HStack{
                     Image(.kaosLogo)
                         .padding(.leading, 100)
-                    NavigationLink(destination: Progress())
+                    NavigationLink(destination: EmptyView())
                     { Image(.yellowFlame)
                             .resizable()
                             .frame(width: 50, height: 75)
@@ -62,19 +58,18 @@ struct HomePage: View {
                     .foregroundStyle(heartButton ? Color.white : Color.burgundy)
                     .offset(x: 5, y: -115)
                 
-                Text("You are feeling irritated right now")
-                Text("(Insert Affirmation)").bold()
+                Text("You are feeling \(selectedMood.rawValue) right now")
                 
                 HStack {
-                    NavigationLink(destination: ReflectionQuiz()) {
+                    NavigationLink(destination: ProgressView()) {
                         Image(.cloud)
                             .overlay(
-                                Text("Reflection Activity")
+                                Text("Kindness Tracker")
                                     .foregroundStyle(Color.burgundy)
                                     .offset(y: 5)
                             )}
                     
-                    NavigationLink(destination: Breathing()){
+                    NavigationLink(destination: Breathing(selectedMood: selectedMood)){
                         Image(.cloud)
                             .overlay(
                                 Text("Stress Reduction")
@@ -89,5 +84,6 @@ struct HomePage: View {
 }
 
 #Preview {
-    HomePage()
+    HomePage(selectedMood: .calm)
+        .environmentObject(SharedData())
 }

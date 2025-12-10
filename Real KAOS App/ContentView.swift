@@ -1,13 +1,13 @@
-//
-//  ContentView.swift
-//  Real KAOS App
-//
-//  Created by Courey Jimenez on 12/1/25.
-//
-
 import SwiftUI
 
+enum Mood: String {
+    case calm = "calm"
+    case frustrated = "frustrated"
+    case angry = "angry"
+}
+
 struct ContentView: View {
+    @StateObject var sharedData = SharedData()
     var body: some View {
         NavigationStack {
             ZStack{
@@ -22,15 +22,15 @@ struct ContentView: View {
                         .font(.custom("Lexend-Bold", size: 20))
                     
                     //BUTTON
-                    NavigationLink(destination: HomePage()){
+                    NavigationLink(destination: HomePage(selectedMood: .calm)){
                         Image(.yellowFlame)
                             .resizable()
                             .frame(width: 75, height: 125)
                     }
                     Text("Calm")
-                        .font(.custom("Lexend-Regular", size: 20))
+                        .font(.custom("Lexend-Medium", size: 20))
                     //BUTTON
-                    NavigationLink(destination: Breathing()){
+                    NavigationLink(destination: Breathing(selectedMood: .frustrated)){
                         Image(.orangeFlame)
                             .resizable()
                         .frame(width: 75, height: 125)}
@@ -45,10 +45,10 @@ struct ContentView: View {
                         .padding(.top, -68)
                         .offset(x: -23)
                     Text("Frustrated")
-                        .font(.custom("Lexend-Regular", size: 20))
+                        .font(.custom("Lexend-Medium", size: 20))
                     Spacer()
                     //BUTTON
-                    NavigationLink(destination: Breathing()){
+                    NavigationLink(destination: Breathing(selectedMood: .angry)){
                         Image(.redFlame)
                             .resizable()
                         .frame(width: 75, height: 125)}
@@ -67,13 +67,14 @@ struct ContentView: View {
                         .frame(width: 75, height: 60)
                         .offset(y: -55)
                     Text("Angry")
-                        .font(.custom("Lexend-Regular", size: 20))
+                        .font(.custom("Lexend-Medium", size: 20))
                         .padding(.top, -50)
                 }
                 .padding()
                 
             }
         }
+        .environmentObject(sharedData)
     }
 }
 
