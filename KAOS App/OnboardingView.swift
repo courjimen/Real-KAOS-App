@@ -137,13 +137,13 @@ struct OnboardingView: View {
             Image(.streak)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 300)
+                .frame(height: 225)
                 .offset(y: isAnimating ? 0 : 20)
                 .animation(.spring(dampingFraction: 0.6).delay(0.2), value: isAnimating)
                 .zIndex(1)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(borderGradient, lineWidth: 5)
+                        .stroke(borderGradient, lineWidth: 4)
                 )
                 .shadow(radius: 8)
         }

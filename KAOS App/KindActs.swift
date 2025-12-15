@@ -124,7 +124,7 @@ struct KindActs: View {
                             .padding(.horizontal, 24)
                             .padding(.vertical, 12)
                             .background(Color.burgundy.opacity(0.15))
-                            .foregroundColor(.black)
+                            .foregroundColor(.blickityblack)
                             .clipShape(Capsule())
                             .overlay(
                                 Capsule().stroke(Color.burgundy.opacity(0.35), lineWidth: 1)
@@ -179,8 +179,8 @@ struct KindActs: View {
                                 .font(.custom("Lexend-Bold", size: 18))
                                 .padding(.horizontal, 24)
                                 .padding(.vertical, 12)
-                                .background(Color.burgundy)
-                                .foregroundColor(.white)
+                                .background(Color.blickityblack)
+                                .foregroundColor(.brightWhite)
                                 .clipShape(Capsule())
                         }
                         .padding(.top, 10)
@@ -319,9 +319,9 @@ struct CardStackView: View {
         .onAppear {
             self.topCard = deck.last
         }
-        .onChange(of: deck) {
-            self.topCard = deck.last
-        }
+//        .onChange(of: deck) {
+//            self.topCard = deck.last
+//        }
         .onDisappear {
             self.topCard = deck.last
         }

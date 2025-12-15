@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B581619F2EDDFADD00B07380 /* Real KAOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Real KAOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B58161AC2EDDFADE00B07380 /* Real KAOS AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Real KAOS AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B58161B62EDDFADE00B07380 /* Real KAOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Real KAOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B581619F2EDDFADD00B07380 /* KAOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KAOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B58161AC2EDDFADE00B07380 /* KAOS AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KAOS AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B58161B62EDDFADE00B07380 /* KAOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KAOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -85,9 +85,9 @@
 		B58161A02EDDFADD00B07380 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B581619F2EDDFADD00B07380 /* Real KAOS App.app */,
-				B58161AC2EDDFADE00B07380 /* Real KAOS AppTests.xctest */,
-				B58161B62EDDFADE00B07380 /* Real KAOS AppUITests.xctest */,
+				B581619F2EDDFADD00B07380 /* KAOS App.app */,
+				B58161AC2EDDFADE00B07380 /* KAOS AppTests.xctest */,
+				B58161B62EDDFADE00B07380 /* KAOS AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B581619E2EDDFADD00B07380 /* Real KAOS App */ = {
+		B581619E2EDDFADD00B07380 /* KAOS App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B58161C02EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS App" */;
+			buildConfigurationList = B58161C02EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS App" */;
 			buildPhases = (
 				B581619B2EDDFADD00B07380 /* Sources */,
 				B581619C2EDDFADD00B07380 /* Frameworks */,
@@ -110,16 +110,16 @@
 			fileSystemSynchronizedGroups = (
 				B58161A12EDDFADD00B07380 /* KAOS App */,
 			);
-			name = "Real KAOS App";
+			name = "KAOS App";
 			packageProductDependencies = (
 			);
 			productName = "Real KAOS App";
-			productReference = B581619F2EDDFADD00B07380 /* Real KAOS App.app */;
+			productReference = B581619F2EDDFADD00B07380 /* KAOS App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B58161AB2EDDFADE00B07380 /* Real KAOS AppTests */ = {
+		B58161AB2EDDFADE00B07380 /* KAOS AppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B58161C32EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS AppTests" */;
+			buildConfigurationList = B58161C32EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS AppTests" */;
 			buildPhases = (
 				B58161A82EDDFADE00B07380 /* Sources */,
 				B58161A92EDDFADE00B07380 /* Frameworks */,
@@ -133,16 +133,16 @@
 			fileSystemSynchronizedGroups = (
 				B58161AF2EDDFADE00B07380 /* Real KAOS AppTests */,
 			);
-			name = "Real KAOS AppTests";
+			name = "KAOS AppTests";
 			packageProductDependencies = (
 			);
 			productName = "Real KAOS AppTests";
-			productReference = B58161AC2EDDFADE00B07380 /* Real KAOS AppTests.xctest */;
+			productReference = B58161AC2EDDFADE00B07380 /* KAOS AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B58161B52EDDFADE00B07380 /* Real KAOS AppUITests */ = {
+		B58161B52EDDFADE00B07380 /* KAOS AppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B58161C62EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS AppUITests" */;
+			buildConfigurationList = B58161C62EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS AppUITests" */;
 			buildPhases = (
 				B58161B22EDDFADE00B07380 /* Sources */,
 				B58161B32EDDFADE00B07380 /* Frameworks */,
@@ -156,11 +156,11 @@
 			fileSystemSynchronizedGroups = (
 				B58161B92EDDFADE00B07380 /* Real KAOS AppUITests */,
 			);
-			name = "Real KAOS AppUITests";
+			name = "KAOS AppUITests";
 			packageProductDependencies = (
 			);
 			productName = "Real KAOS AppUITests";
-			productReference = B58161B62EDDFADE00B07380 /* Real KAOS AppUITests.xctest */;
+			productReference = B58161B62EDDFADE00B07380 /* KAOS AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B581619A2EDDFADD00B07380 /* Build configuration list for PBXProject "Real KAOS App" */;
+			buildConfigurationList = B581619A2EDDFADD00B07380 /* Build configuration list for PBXProject "KAOS App" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B581619E2EDDFADD00B07380 /* Real KAOS App */,
-				B58161AB2EDDFADE00B07380 /* Real KAOS AppTests */,
-				B58161B52EDDFADE00B07380 /* Real KAOS AppUITests */,
+				B581619E2EDDFADD00B07380 /* KAOS App */,
+				B58161AB2EDDFADE00B07380 /* KAOS AppTests */,
+				B58161B52EDDFADE00B07380 /* KAOS AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		B58161AE2EDDFADE00B07380 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B581619E2EDDFADD00B07380 /* Real KAOS App */;
+			target = B581619E2EDDFADD00B07380 /* KAOS App */;
 			targetProxy = B58161AD2EDDFADE00B07380 /* PBXContainerItemProxy */;
 		};
 		B58161B82EDDFADE00B07380 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B581619E2EDDFADD00B07380 /* Real KAOS App */;
+			target = B581619E2EDDFADD00B07380 /* KAOS App */;
 			targetProxy = B58161B72EDDFADE00B07380 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -408,12 +408,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-App";
+				PRODUCT_BUNDLE_IDENTIFIER = KAOS.Courey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -439,12 +440,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-App";
+				PRODUCT_BUNDLE_IDENTIFIER = KAOS.Courey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -460,14 +462,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885D8LZPH6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Real KAOS App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Real KAOS App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KAOS App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KAOS App";
 			};
 			name = Debug;
 		};
@@ -479,14 +481,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885D8LZPH6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Real KAOS App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Real KAOS App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KAOS App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KAOS App";
 			};
 			name = Release;
 		};
@@ -497,6 +499,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885D8LZPH6;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -514,6 +518,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885D8LZPH6;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Courey.Real-KAOS-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -527,7 +533,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B581619A2EDDFADD00B07380 /* Build configuration list for PBXProject "Real KAOS App" */ = {
+		B581619A2EDDFADD00B07380 /* Build configuration list for PBXProject "KAOS App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B58161BE2EDDFADE00B07380 /* Debug */,
@@ -536,7 +542,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B58161C02EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS App" */ = {
+		B58161C02EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B58161C12EDDFADE00B07380 /* Debug */,
@@ -545,7 +551,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B58161C32EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS AppTests" */ = {
+		B58161C32EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS AppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B58161C42EDDFADE00B07380 /* Debug */,
@@ -554,7 +560,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B58161C62EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "Real KAOS AppUITests" */ = {
+		B58161C62EDDFADE00B07380 /* Build configuration list for PBXNativeTarget "KAOS AppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B58161C72EDDFADE00B07380 /* Debug */,

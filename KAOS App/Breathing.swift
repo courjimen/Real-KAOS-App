@@ -21,8 +21,8 @@ struct Breathing: View {
             Text(phaseText)
                 .font(.custom("Lexend-Bold", size: 20))
                 .minimumScaleFactor(0.5)
-                .foregroundColor(phase == .hold ? .black : .burgundy)
-                .shadow(color: (phase == .hold ? Color.black.opacity(0.25) : Color.white.opacity(0.8)),
+                .foregroundColor(phase == .hold ? .blickityblack : .burgundy)
+                .shadow(color: (phase == .hold ? Color.blickityblack.opacity(0.25) : Color.white.opacity(0.8)),
                         radius: 0, x: 0, y: 0)
                 .frame(width: 150, height: 150)
                 .padding(.top, 100)
@@ -48,13 +48,13 @@ struct Breathing: View {
                 
                 Text(phaseLabel)
                     .font(.custom("Lexend-Medium", size: 20))
-                    .foregroundColor(.black.opacity(0.9))
+                    .foregroundColor(.blickityblack.opacity(0.9))
                 
                 if phase == .hold {
                     
                     Text("\(countdownTimer)")
                         .font(.system(size: 45, weight: .bold))
-                        .foregroundColor(.black)
+                        .foregroundColor(.blickityblack)
                         .padding(.top, -100)
                         .onReceive(timer) { _ in
                             
@@ -78,7 +78,7 @@ struct Breathing: View {
                         .padding(.horizontal, 24)
                         .padding(.vertical, 12)
                         .background(Color.burgundy.opacity(0.15))
-                        .foregroundColor(.black)
+                        .foregroundColor(.blickityblack)
                         .clipShape(Capsule())
                         .overlay(
                             Capsule().stroke(Color.burgundy.opacity(0.35), lineWidth: 1)

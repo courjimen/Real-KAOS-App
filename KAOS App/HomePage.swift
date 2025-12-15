@@ -61,7 +61,7 @@ struct HomePage: View {
                 }
                 Text("Do A Kind Act")
                     .font(Font.custom("Lexend-Bold", size: 25))
-                    .foregroundStyle(heartButton ? Color.white : Color.burgundy)
+                    .foregroundStyle(heartButton ? Color.brightWhite : Color.burgundy)
                     .offset(x: 5, y: -115)
                 
                 Text("You are feeling \(selectedMood.rawValue) right now")
@@ -71,7 +71,7 @@ struct HomePage: View {
                         Image(.cloud)
                             .overlay(
                                 Text("Kindness Tracker")
-                                    .foregroundStyle(Color.burgundy)
+                                    .foregroundStyle(Color.justRed)
                                     .offset(y: 5)
                             )}
                     
@@ -79,7 +79,7 @@ struct HomePage: View {
                         Image(.cloud)
                             .overlay(
                                 Text("Stress Reduction")
-                                    .foregroundStyle(Color.burgundy)
+                                    .foregroundStyle(Color.justRed)
                                     .offset(y: 4)
                             )}
                 }

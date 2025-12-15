@@ -16,7 +16,7 @@ struct SavedChallengeRow: View {
                     
                     Text(challenge.task)
                         .font(.custom("Lexend-Medium", size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.blickityblack)
                 }
                 .padding(.vertical, 8)
                 
@@ -34,7 +34,7 @@ struct SavedChallengeRow: View {
                     Text("Complete")
                         .font(.caption)
                         .fontWeight(.bold)
-                        .foregroundColor(isMoving ? .white : .primary) // Text color white if moving, primary (black) otherwise
+                        .foregroundColor(isMoving ? .white : .primary) // Text color white if moving, primary (blickityblack) otherwise
                         .padding(.vertical, 8)
                         .padding(.horizontal, 10)
     
@@ -94,7 +94,7 @@ struct SavedChallengeRow: View {
                                     
                                     Text(challenge.task)
                                         .font(.custom("Lexend-Medium", size: 16))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.blickityblack)
                                 }
                             }
                             .onDelete(perform: deleteCompletedItems)
